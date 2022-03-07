@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] float chaseRange = 15f;
     [SerializeField] float turnSpeed = 5f;
     [SerializeField] float beingChasedRange = 25f;
-    NavMeshAgent navMeshAgent;
+    public NavMeshAgent navMeshAgent;
     float distanceToTarget = Mathf.Infinity;
+    PlaerMovementScript player;
+    public bool RelicPicked = false;
+
 
 
     bool isProvoked = false;
@@ -18,6 +22,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent <NavMeshAgent>();
+        player = FindObjectOfType<PlaerMovementScript>();
 
     }
 
@@ -25,15 +30,14 @@ public class EnemyAI : MonoBehaviour
     {
         distanceToTarget = Vector3.Distance(target.position, transform.position);
         
-        if (isProvoked)
+        if (isProvoked & player.isVisible)
         {
             EngageTarget();
 
         }
 
-        else if (distanceToTarget <= chaseRange)
+        else if (distanceToTarget <= chaseRange && RelicPicked )
         {
-            //if (RelicPicked){}
             isProvoked = true; // add a setting to provoke the angel after picking the relic
         }
     }
@@ -66,7 +70,6 @@ public class EnemyAI : MonoBehaviour
     private void AttackTarget()
     {
         GetComponent<Animator>().SetBool("attack", true);
-        Debug.Log(name + " Is destroying " + target.name);
     }
 
 

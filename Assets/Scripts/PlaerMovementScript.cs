@@ -11,9 +11,12 @@ public class PlaerMovementScript : MonoBehaviour
     public float runSpeed = 18f;
     private float speedSave;
 
+    public bool isVisible = true;// invis check
+
     private float SpeedPrevious;
     [SerializeField] float boostTimer = 5f;
     private bool boosted = false;
+    public GameObject Hands;
 
     public KeyCode RunKey = KeyCode.LeftShift;
 
@@ -29,6 +32,7 @@ public class PlaerMovementScript : MonoBehaviour
     void Start()
     {
         speedSave = speed;
+        SpeedPrevious = speed;
     }
 
     void Update()
@@ -38,6 +42,15 @@ public class PlaerMovementScript : MonoBehaviour
         if (IsGrounded && velocity.y <0)
         {
             velocity.y = -2f;
+        }
+
+        if (!isVisible)
+        {
+            Hands.SetActive(false);
+        }
+        else
+        {
+            Hands.SetActive(true);
         }
 
         float x = Input.GetAxis("Horizontal");
@@ -68,7 +81,9 @@ public class PlaerMovementScript : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
         Debug.Log("Player speed: " + speed);
 
-        if (boostTimer > 0.1f && boosted == true)
+
+        // Can be used for any type of boost.
+        if (boostTimer > 0.1f && (boosted == true || isVisible == false))
         {    
             boostTimer -= Time.deltaTime;
         }
@@ -76,7 +91,9 @@ public class PlaerMovementScript : MonoBehaviour
         {
             speedSave = SpeedPrevious;
             boosted = false;
+            isVisible = true;
             boostTimer = 5f;
+            Debug.Log ("You are visible");
         }
     }
 
