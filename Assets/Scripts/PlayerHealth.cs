@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] float hitPoints = 3f;
+    [SerializeField] public float hitPoints = 3f;
 
     public void TakeDamage (float Damage)
     {
@@ -12,8 +12,9 @@ public class PlayerHealth : MonoBehaviour
 
         if (hitPoints<=0)
         {
-           Debug.Log("You Dead");
+           GetComponent<DeathHandeler>().HandleDeath();
         }
     } 
+    
 
 }

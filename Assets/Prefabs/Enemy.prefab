@@ -232,6 +232,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   chaseRange: 13.94
+  turnSpeed: 5
+  beingChasedRange: 25
+  navMeshAgent: {fileID: 0}
+  RelicPicked: 0
 --- !u!114 &3884238792370195232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5f4be1fa081dd43815cd3b7790555d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 34
+  damage: 1
 --- !u!95 &2376556031231678460
 Animator:
   serializedVersion: 3

@@ -18,7 +18,7 @@ public class PlaerMovementScript : MonoBehaviour
     private bool boosted = false;
     public GameObject Hands;
 
-    public KeyCode RunKey = KeyCode.LeftShift;
+	public KeyCode RunKey = KeyCode.LeftShift;
 
     
     public Transform groundCheck;
@@ -58,7 +58,7 @@ public class PlaerMovementScript : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;     
         
-        if (Input.GetKeyDown(RunKey))
+	    if (Input.GetKey(RunKey))
         {
             speed = runSpeed;
         }

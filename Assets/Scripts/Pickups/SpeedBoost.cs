@@ -23,14 +23,12 @@ public class SpeedBoost : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        PlaerMovementScript target = FindObjectOfType<PlaerMovementScript>();
         if (other.gameObject.tag == "Player")
         {
         timer = 5f;
-        
             if (timer > 0f)
             {
-                target.SpeedMultipl(Speedboost);
+                FindObjectOfType<PlaerMovementScript>().SpeedMultipl(Speedboost);
                 Debug.Log("Activating Speeeeeeed");
             }
         Destroy(gameObject);
